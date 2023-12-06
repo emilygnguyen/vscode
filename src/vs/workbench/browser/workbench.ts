@@ -43,12 +43,59 @@ import { IHostService } from 'vs/workbench/services/host/browser/host';
 import { IDialogService } from 'vs/platform/dialogs/common/dialogs';
 import { mainWindow } from 'vs/base/browser/window';
 
+export class FontStyleEditor {
+    private container: HTMLElement;
+    private fontSizeInput: HTMLInputElement;
+    private fontStyleInput: HTMLInputElement;
+    private applyButton: HTMLButtonElement;
+
+    constructor(parentElement: HTMLElement) {
+        this.container = document.createElement('div');
+        this.container.id = 'fontStyleContainer';
+
+        this.fontSizeInput = document.createElement('input');
+        this.fontSizeInput.type = 'text';
+        this.fontSizeInput.id = 'fontSizeInput';
+        this.fontSizeInput.placeholder = 'Font Size (e.g., 14px)';
+
+        this.fontStyleInput = document.createElement('input');
+        this.fontStyleInput.type = 'text';
+        this.fontStyleInput.id = 'fontStyleInput';
+        this.fontStyleInput.placeholder = 'Font Style (e.g., Arial)';
+
+        this.applyButton = document.createElement('button');
+        this.applyButton.id = 'applyFontStyle';
+        this.applyButton.textContent = 'Apply';
+
+        this.container.appendChild(this.fontSizeInput);
+        this.container.appendChild(this.fontStyleInput);
+        this.container.appendChild(this.applyButton);
+
+        parentElement.appendChild(this.container);
+
+        this.addEventListeners();
+    }
+
+    private addEventListeners(): void {
+        this.applyButton.addEventListener('click', () => {
+            const fontSize = this.fontSizeInput.value;
+            const fontStyle = this.fontStyleInput.value;
+
+            // Implement the logic to apply the font size and style
+            // For example, applying it to the whole document body
+            document.body.style.fontSize = fontSize;
+            document.body.style.fontFamily = fontStyle;
+        });
+    }
+}
+
+
 export interface IWorkbenchOptions {
 
 	/**
 	 * Extra classes to be added to the workbench container.
 	 */
-	extraClasses?: string[];
+	extraClasses?: string["FontStyleEditor"];
 }
 
 export class Workbench extends Layout {
