@@ -367,6 +367,11 @@ export class Workbench extends Layout {
 		this.parent.appendChild(this.mainContainer);
 	}
 
+	private changeFont(fontSize: int, fontStyle: string) : void {
+		this.mainContainer.style.fontSize = fontSize;
+		this.mainContainer.style.fontFamily = fontStyle;
+	}
+
 	private createPart(id: string, role: string, classes: string[]): HTMLElement {
 		const part = document.createElement(role === 'status' ? 'footer' /* Use footer element for status bar #98376 */ : 'div');
 		part.classList.add('part', ...classes);
